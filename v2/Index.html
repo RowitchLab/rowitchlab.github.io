@@ -1,0 +1,589 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kim Laboratory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00B4D8',
+                        dark: '#0A0A0A',
+                        light: '#F5F5F5'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .slide {
+                height: 100vh;
+                width: 100%;
+                scroll-snap-align: start;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+        }
+    </style>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-y: scroll;
+            height: 100vh;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+        
+        .slide {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Animation effects */
+        .fade-in {
+            animation: fadeIn 1s ease-in forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+    </style>
+</head>
+
+<body class="bg-dark text-light font-inter">
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 py-4 bg-dark/80 bg-blur transition-all duration-300">
+        <div class="container mx-auto px-6 md:px-12">
+            <nav class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">RL</span>
+                    </div>
+                    <span class="text-xl font-bold text-white">ROWITCH LAB</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-light hover:text-primary transition-all duration-300">ABOUT</a>
+                    <a href="#research" class="text-light hover:text-primary transition-all duration-300">RESEARCH</a>
+                    <a href="#team" class="text-light hover:text-primary transition-all duration-300">TEAM</a>
+                    <a href="#publications" class="text-light hover:text-primary transition-all duration-300">PUBLICATIONS</a>
+                    <a href="#contact" class="text-light hover:text-primary transition-all duration-300">CONTACT</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-light focus:outline-none">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </nav>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#about" class="text-light hover:text-primary transition-all duration-300">ABOUT</a>
+                    <a href="#research" class="text-light hover:text-primary transition-all duration-300">RESEARCH</a>
+                    <a href="#team" class="text-light hover:text-primary transition-all duration-300">TEAM</a>
+                    <a href="#publications" class="text-light hover:text-primary transition-all duration-300">PUBLICATIONS</a>
+                    <a href="#contact" class="text-light hover:text-primary transition-all duration-300">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation dots -->
+    <nav class="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 flex flex-col space-y-4">
+        <button class="nav-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-index="0"></button>
+        <button class="nav-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-index="1"></button>
+        <button class="nav-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-index="2"></button>
+        <button class="nav-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-index="3"></button>
+        <button class="nav-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-index="4"></button>
+    </nav>
+
+    <!-- Slide 1: Hero -->
+    <section id="about" class="slide bg-cover bg-center" style="background-image: url('https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7618cf6b23fb4746bf2a45d7cc4cffdb.png~tplv-a9rns2rl98-24:720:720.png?rcl=20251008153235859187195DA48C026AC9&amp;rk3s=8e244e95&amp;rrcfp=8a172a1a&amp;x-expires=1760513555&amp;x-signature=1DyyYkOq5yx8HYjV8PD3YudzqMk%3D')">
+        <div class="absolute inset-0 bg-dark/60"></div>
+        <div class="container mx-auto px-6 md:px-12 h-full flex flex-col justify-between relative z-10">
+            <!-- Top Text -->
+            <div class="pt-24 md:pt-32 opacity-0 fade-in">
+                <p class="text-xl md:text-2xl font-light text-shadow mb-4 max-w-3xl">We are recruiting! Join us to study chromosome organization and dynamics or RNA lifecycle using single-molecule tracking, genomics, and in vitro single-molecule assays.</p>
+            </div>
+            
+            <!-- Bottom Right Text -->
+            <div class="pb-16 md:pb-24 text-right opacity-0 fade-in delay-300">
+                <div class="inline-block bg-dark/60 bg-blur px-6 py-4 rounded-lg shadow-lg">
+                    <h2 class="text-2xl md:text-4xl font-bold mb-2 text-primary">Welcome to Rowitch LAB</h2>
+                    <p class="text-light/80 text-lg">Exploring the Frontiers of Molecular Biology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: About -->
+    <section id="research" class="slide bg-gradient-to-b from-dark to-dark/95">
+        <div class="container mx-auto px-6 md:px-12 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-primary font-semibold opacity-0 fade-in">OUR RESEARCH</span>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 opacity-0 fade-in delay-200">
+                        Investigating<br>Molecular Mechanisms
+                    </h2>
+                    <p class="text-gray-300 text-lg mb-8 opacity-0 fade-in delay-300">
+                        Our laboratory focuses on understanding the fundamental mechanisms of chromosome organization and RNA regulation. We employ advanced single-molecule techniques and genomic approaches to address these questions.
+                    </p>
+                    <ul class="space-y-4 opacity-0 fade-in delay-400">
+                        <li class="flex items-start">
+                            <i class="fa fa-flask text-primary mt-1 mr-3 text-xl"></i>
+                            <span>Single-molecule tracking in live cells</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-dna text-primary mt-1 mr-3 text-xl"></i>
+                            <span>Chromosome structure and dynamics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-rna text-primary mt-1 mr-3 text-xl"></i>
+                            <span>RNA processing and regulation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-microscope text-primary mt-1 mr-3 text-xl"></i>
+                            <span>Super-resolution microscopy</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="opacity-0 fade-in delay-500">
+                    <img src="https://picsum.photos/id/180/800/600" alt="Laboratory research" class="rounded-xl shadow-2xl w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Team -->
+    <section id="team" class="slide bg-dark">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="text-center mb-16">
+                <span class="text-primary font-semibold opacity-0 fade-in">OUR TEAM</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 opacity-0 fade-in delay-200">
+                    Meet Our Researchers
+                </h2>
+                <p class="text-gray-300 text-lg max-w-3xl mx-auto opacity-0 fade-in delay-300">
+                    Our diverse team of scientists brings expertise from various disciplines to address complex biological questions
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 opacity-0 fade-in delay-400">
+                <!-- Principal Investigator -->
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://picsum.photos/id/64/200/200" alt="Dr. Kim" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-1">Dr. Sarah Kim</h3>
+                    <p class="text-primary text-center mb-3">Principal Investigator</p>
+                    <p class="text-gray-400 text-center text-sm">
+                        Specializing in molecular biology and single-molecule techniques with over 15 years of research experience.
+                    </p>
+                </div>
+                
+                <!-- Researchers -->
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://picsum.photos/id/91/200/200" alt="Dr. Chen" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-1">Dr. Michael Chen</h3>
+                    <p class="text-primary text-center mb-3">Senior Researcher</p>
+                    <p class="text-gray-400 text-center text-sm">
+                        Expert in genomics and computational biology with focus on chromosome structure.
+                    </p>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://picsum.photos/id/65/200/200" alt="Dr. Rodriguez" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-1">Dr. Elena Rodriguez</h3>
+                    <p class="text-primary text-center mb-3">Postdoctoral Fellow</p>
+                    <p class="text-gray-400 text-center text-sm">
+                        Specializing in RNA biology and fluorescence microscopy techniques.
+                    </p>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                    <div class="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden">
+                        <img src="https://picsum.photos/id/177/200/200" alt="John Smith" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-1">John Smith</h3>
+                    <p class="text-primary text-center mb-3">Graduate Student</p>
+                    <p class="text-gray-400 text-center text-sm">
+                        Studying chromosome dynamics using advanced imaging techniques.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Publications -->
+    <section id="publications" class="slide bg-gradient-to-b from-dark/95 to-dark">
+        <div class="container mx-auto px-6 md:px-12 max-w-5xl">
+            <div class="text-center mb-16">
+                <span class="text-primary font-semibold opacity-0 fade-in">PUBLICATIONS</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 opacity-0 fade-in delay-200">
+                    Recent Publications
+                </h2>
+                <p class="text-gray-300 text-lg max-w-3xl mx-auto opacity-0 fade-in delay-300">
+                    Our research findings have been published in leading scientific journals
+                </p>
+            </div>
+            
+            <div class="space-y-6 opacity-0 fade-in delay-400">
+                <!-- Publication 1 -->
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-white hover:text-primary transition-colors">
+                        <a href="#">Single-molecule visualization of chromosome organization in live cells</a>
+                    </h3>
+                    <p class="text-gray-400 mb-3">
+                        Kim S., Chen M., Rodriguez E., Smith J. (2023)
+                        <span class="text-primary font-medium">Nature Cell Biology</span>, 25(4): 567-578.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Chromosomes</span>
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Imaging</span>
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Single-molecule</span>
+                    </div>
+                </div>
+                
+                <!-- Publication 2 -->
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-white hover:text-primary transition-colors">
+                        <a href="#">RNA dynamics during transcriptional regulation</a>
+                    </h3>
+                    <p class="text-gray-400 mb-3">
+                        Rodriguez E., Smith J., Kim S. (2022)
+                        <span class="text-primary font-medium">Molecular Cell</span>, 82(11): 2103-2117.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">RNA</span>
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Transcription</span>
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Dynamics</span>
+                    </div>
+                </div>
+                
+                <!-- Publication 3 -->
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-primary/50 transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2 text-white hover:text-primary transition-colors">
+                        <a href="#">Novel insights into chromatin structure using super-resolution microscopy</a>
+                    </h3>
+                    <p class="text-gray-400 mb-3">
+                        Chen M., Kim S., Rodriguez E. (2021)
+                        <span class="text-primary font-medium">Cell Reports</span>, 35(7): 109285.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Chromatin</span>
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Super-resolution</span>
+                        <span class="bg-primary/20 text-primary text-xs px-3 py-1 rounded-full">Epigenetics</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center opacity-0 fade-in delay-500">
+                <a href="#" class="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-all">
+                    View all publications <i class="fa fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Contact -->
+    <section id="contact" class="slide bg-dark">
+        <div class="container mx-auto px-6 md:px-12 max-w-5xl">
+            <div class="text-center mb-16">
+                <span class="text-primary font-semibold opacity-0 fade-in">GET IN TOUCH</span>
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 opacity-0 fade-in delay-200">
+                    Contact Us
+                </h2>
+                <p class="text-gray-300 text-lg max-w-3xl mx-auto opacity-0 fade-in delay-300">
+                    Interested in our research or looking to join our team? Reach out to us.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 opacity-0 fade-in delay-400">
+                <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+                    <h3 class="text-2xl font-bold mb-6">Send us a message</h3>
+                    <form>
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-300 font-medium mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-white">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-300 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-white">
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-300 font-medium mb-2">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-dark border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-white"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-md transition-all duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 mb-8">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                    <i class="fa fa-map-marker text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-white mb-1">Location</h4>
+                                    <p class="text-gray-400">
+                                        Science Research Building, Room 456<br>
+                                        123 University Avenue<br>
+                                        Cambridge, MA 02142
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                    <i class="fa fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-white mb-1">Email</h4>
+                                    <p class="text-gray-400">
+                                        kimlab@university.edu<br>
+                                        sarah.kim@university.edu
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                                    <i class="fa fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-white mb-1">Phone</h4>
+                                    <p class="text-gray-400">
+                                        +1 (555) 123-4567<br>
+                                        +1 (555) 123-4568
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800">
+                        <h3 class="text-2xl font-bold mb-6">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-primary/20 hover:bg-primary/30 text-primary rounded-full flex items-center justify-center transition-all duration-300">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-primary/20 hover:bg-primary/30 text-primary rounded-full flex items-center justify-center transition-all duration-300">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-primary/20 hover:bg-primary/30 text-primary rounded-full flex items-center justify-center transition-all duration-300">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-primary/20 hover:bg-primary/30 text-primary rounded-full flex items-center justify-center transition-all duration-300">
+                                <i class="fa fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.replace('fa-times', 'fa-bars');
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+        
+        // PPT slide functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slide');
+            const navDots = document.querySelectorAll('.nav-dot');
+            let currentIndex = 0;
+            let isScrolling = false;
+            
+            // Initialize first slide
+            showSlide(currentIndex);
+            
+            // Show specified slide
+            function showSlide(index) {
+                // Reset all animation elements
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                });
+                
+                // Animate current slide elements
+                setTimeout(() => {
+                    slides[index].querySelectorAll('.fade-in').forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    });
+                }, 100);
+                
+                // Update navigation dots
+                navDots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('bg-white');
+                        dot.classList.remove('bg-white/50');
+                    } else {
+                        dot.classList.remove('bg-white');
+                        dot.classList.add('bg-white/50');
+                    }
+                });
+            }
+            
+            // Scroll to specified slide
+            function scrollToSlide(index) {
+                if (index >= 0 && index < slides.length) {
+                    currentIndex = index;
+                    slides[index].scrollIntoView({ behavior: 'smooth' });
+                    showSlide(currentIndex);
+                }
+            }
+            
+            // Listen for scroll to change slides
+            window.addEventListener('scroll', function() {
+                if (isScrolling) return;
+                
+                isScrolling = true;
+                setTimeout(() => {
+                    const currentSlide = Math.round(window.scrollY / window.innerHeight);
+                    
+                    if (currentSlide !== currentIndex) {
+                        currentIndex = currentSlide;
+                        showSlide(currentIndex);
+                    }
+                    
+                    isScrolling = false;
+                }, 100);
+            });
+            
+            // Click on navigation dots to change slides
+            navDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    scrollToSlide(index);
+                });
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowDown') {
+                    scrollToSlide(currentIndex + 1);
+                } else if (e.key === 'ArrowUp') {
+                    scrollToSlide(currentIndex - 1);
+                }
+            });
+            
+            // Mouse wheel navigation
+            let wheelTimeout;
+            document.addEventListener('wheel', function(e) {
+                clearTimeout(wheelTimeout);
+                
+                wheelTimeout = setTimeout(() => {
+                    if (e.deltaY > 0) {
+                        // Scroll down
+                        scrollToSlide(currentIndex + 1);
+                    } else {
+                        // Scroll up
+                        scrollToSlide(currentIndex - 1);
+                    }
+                }, 300);
+            }, { passive: true });
+            
+            // Navigation links scroll to corresponding slides
+            const navLinks = document.querySelectorAll('header a[href^="#"]');
+            const sectionIds = ["about", "research", "team", "publications", "contact"];
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const index = sectionIds.indexOf(targetId);
+                    
+                    if (index !== -1) {
+                        scrollToSlide(index);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body></html>
