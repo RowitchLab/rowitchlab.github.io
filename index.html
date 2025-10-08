@@ -1,229 +1,491 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rowitch Lab - Cedars-Sinai Guerin Children's</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width initial-scale=1" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
 
-  <title>Rowitch Lab</title>
-  <meta name="description" content="A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
-">
+        .banner {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
 
-  <link rel="shortcut icon" href="/assets/img/favicon.ico">
+        nav {
+            background: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
 
-  <link rel="stylesheet" href="/assets/css/main.css">
-  <link rel="canonical" href="/">
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #8B4513;
+        }
+
+        .hero {
+            position: relative;
+            height: 600px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #8B4513;
+        }
+
+        .section h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #A0522D;
+            margin-top: 30px;
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .profile-section {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        .profile-image {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .profile-info {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid #8B4513;
+        }
+
+        .profile-info h3 {
+            color: #8B4513;
+            margin-top: 0;
+        }
+
+        .credentials {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: #8B4513;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid #8B4513;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #8B4513;
+            margin-top: 0;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+            color: white;
+            padding: 60px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .highlight-box h2 {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box p {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .announcement-box {
+            background: #fff4e6;
+            border-left: 4px solid #8B4513;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 8px;
+        }
+
+        .announcement-box h3 {
+            color: #8B4513;
+            margin-top: 0;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            color: #bdc3c7;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            nav ul {
+                gap: 15px;
+                font-size: 14px;
+            }
+
+            .profile-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+<body>
+    <div class="banner">
+        🔬 Pioneering genomic medicine and translational research in pediatric neuroscience
+    </div>
 
-
-  <body>
-
-    <header class="site-header">
-
-  <div class="wrapper">
-
-    
-
-    <nav class="site-nav">
-      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
-
-      <div class="trigger">
-        <!-- About -->
-        <a class="page-link" href="/">about</a>
-
-        <!-- Blog -->
-        <!--a class="page-link" href="/blog/">blog</a-->
-
-        <!-- Pages -->
-	
-	
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-            <a class="page-link" href="/projects/">projects</a>
-	  
-        
-          
-            <a class="page-link" href="/papers/">papers</a>
-	  
-        
-          
-            <a class="page-link" href="/members/">members</a>
-	  
-        
-          
-            <a class="page-link" href="/news/">news</a>
-	  
-        
-          
-            <a class="page-link" href="/gallery/">gallery</a>
-	  
-        
-          
-            <a class="page-link" href="/contact/">contact</a>
-	  
-        
-	<!-- abc -->
-
-        <!-- CV link -->
-        <!-- <a class="page-link" href="/assets/pdf/CV.pdf">vitae</a> -->
-
-      </div>
+    <nav>
+        <div class="container">
+            <div class="logo">Rowitch Lab</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#people">People</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
-  </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Advancing Pediatric Genomic Medicine</h1>
+            <p>From bench to bedside: Transforming childhood disease diagnosis and treatment</p>
+        </div>
+    </section>
 
-</header>
+    <div class="container">
+        <section class="section">
+            <div class="profile-section">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600" alt="Professor David Rowitch" class="profile-image">
+                <div class="profile-info">
+                    <h3>Professor David H. Rowitch, MD, PhD</h3>
+                    <div class="credentials">
+                        <span class="badge">FMedSci</span>
+                        <span class="badge">FRS</span>
+                        <span class="badge">NAM</span>
+                    </div>
+                    <p style="margin-top: 20px;"><strong>Associate Director of Research</strong><br>
+                    Cedars-Sinai Guerin Children's</p>
+                    <p><strong>Professor</strong><br>
+                    Departments of Pediatrics and Neurosurgery</p>
+                    <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
+                    <strong>Also serving as:</strong><br>
+                    Professor & Head of Department of Paediatrics, University of Cambridge<br>
+                    Wellcome Trust Senior Investigator<br>
+                    Academic Lead, Cambridge Children's Hospital</p>
+                </div>
+            </div>
+        </section>
 
+        <div class="announcement-box">
+            <h3>🎉 Recent Achievement</h3>
+            <p><strong>Elected to National Academy of Medicine (2024)</strong> - One of the highest honors in health and medicine, recognizing groundbreaking contributions to understanding pediatric neurological diseases.</p>
+        </div>
 
+        <section class="section">
+            <h2>About the Lab</h2>
+            <p>Professor Rowitch is an internationally renowned neonatologist and developmental neuroscientist leading the research enterprise at Cedars-Sinai Guerin Children's. He transitioned to Cedars-Sinai in 2023 while maintaining his leadership positions at the University of Cambridge.</p>
+            <p>Our laboratory investigates genetic factors that determine glial cell development and diversity, comprising 90% of cells in the human brain. We utilize cutting-edge genomic technologies including whole genome sequencing, single-cell biology, and functional genomics to diagnose and treat rare neurogenetic disorders in children.</p>
+            <p>As Associate Director of Research at Guerin Children's, Professor Rowitch oversees an ambitious vision to integrate genomic medicine into clinical care, establishing high-impact investigative programs in pediatric research.</p>
+        </section>
 
-    <div class="page-content">
-      <div class="wrapper">
-        <div class="post">
+        <div class="stat-grid">
+            <div class="stat-box">
+                <div class="stat-number">66,000+</div>
+                <div class="stat-label">Citations</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">24hrs</div>
+                <div class="stat-label">Genome sequencing time</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">6B+</div>
+                <div class="stat-label">DNA base pairs analyzed</div>
+            </div>
+        </div>
 
-  <header class="post-header">
-    <h1 class="post-title"><strong>Rowitch Lab</strong></h1>
-    <h5 class="post-description">Many body problems in biology at the single-molecule level</h5>
-  </header>
+        <section class="section">
+            <h2>Research Vision at Cedars-Sinai</h2>
+            
+            <h3>Whole Genome Sequencing Program</h3>
+            <p>We are pioneering the integration of whole genome sequencing as a bedside diagnostic tool. What once took 10 years and international collaboration can now be completed within 24 hours through a simple blood test. This technology allows us to analyze over 6 billion base pairs of DNA, providing crucial information for:</p>
+            <p>• Rapid diagnosis of critically ill children in the NICU<br>
+            • Precision medicine approaches tailored to individual genetic profiles<br>
+            • Predicting disease before symptoms appear<br>
+            • Optimizing medication selection based on genomic data</p>
 
-  <article class="post-content <strong>Rowitch Lab</strong> clearfix">
-    
-  <div class="profile col one ">
-    
-    
-  </div>
+            <h3>Birth Cohort Study</h3>
+            <p>We are developing an ambitious birth cohort study to define the future of newborn screening. By collecting genomic data from babies in the Cedars-Sinai Neonatal Intensive Care Unit, we aim to:</p>
+            <p>• Identify thousands of biomarker combinations predicting health risks<br>
+            • Connect genomic patterns with conditions like respiratory infections and learning disabilities<br>
+            • Provide genetic counseling and recruit participants for precision medicine trials<br>
+            • Expand this program throughout the Los Angeles healthcare network</p>
 
+            <h3>Integrated Physical-Mental Healthcare</h3>
+            <p>Building on his work at Cambridge Children's Hospital, Professor Rowitch is developing innovative approaches to integrated physical and mental healthcare, recognizing the interconnected nature of childhood health challenges.</p>
+        </section>
 
-<p>We are a Glia Neuroscience lab in <a href="https://www.cedars-sinai.org/locations/dunitz-childrens-health-center-123.html" target="_blank">Cedars-Sinai Guerin Children’s</a>. 
-    We study the molecular and cellular mechanisms that govern the development of glial cells in the central nervous system (CNS) and their roles in neurological diseases.
-<br />
-<br />
-We are hiring! We are looking for highly energetic and motivated graduate students and postdocs with a background in physics, chemistry, or biology.</p>
+        <section class="section">
+            <h2>Key Research Areas</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600" alt="Glial cell research">
+                    <div class="card-content">
+                        <h3>Glial Cell Biology</h3>
+                        <p>Investigating genetic factors determining development and diversity of glial cells, with applications to leukodystrophy and multiple sclerosis</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1631563019158-b2b36a32c44c?w=600" alt="Neonatal care">
+                    <div class="card-content">
+                        <h3>Neonatal Brain Injury</h3>
+                        <p>Advanced diagnosis and treatment strategies for white matter injury in premature infants and cerebral palsy</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?w=600" alt="Genomic medicine">
+                    <div class="card-content">
+                        <h3>Functional Genomics</h3>
+                        <p>Single-cell biology and whole genome sequencing to diagnose rare neurogenetic disorders and develop novel therapies</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1530210124550-912dc1381cb8?w=600" alt="Stem cell therapy">
+                    <div class="card-content">
+                        <h3>Regenerative Medicine</h3>
+                        <p>Neural stem cell transplantation for conditions like Pelizaeus-Merzbacher Disease and developmental biology research</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600" alt="Pediatric screening">
+                    <div class="card-content">
+                        <h3>Newborn Screening Innovation</h3>
+                        <p>Developing next-generation screening protocols using biomarker analysis and genomic data for early disease detection</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600" alt="Clinical translation">
+                    <div class="card-content">
+                        <h3>Translational Research</h3>
+                        <p>Bridging basic science discoveries with clinical applications to improve pediatric care and outcomes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="section">
+            <h2>Leadership & Recognition</h2>
+            <p><strong>National Academy of Medicine (2024):</strong> Elected in recognition of groundbreaking scientific contributions to understanding pediatric neurological diseases.</p>
+            
+            <p><strong>Fellow of the Royal Society (2021):</strong> One of the highest scientific honors in the UK, recognizing excellence in research.</p>
+            
+            <p><strong>Fellow of the Academy of Medical Sciences (2018):</strong> Honoring outstanding contributions to medical science.</p>
+            
+            <p><strong>American Association of Physicians (2012):</strong> Elected for distinguished contributions to medicine.</p>
 
-  </article>
+            <p><strong>NIH Leadership:</strong> Served as member of the National Advisory Council for Child Health and Development of the National Institutes of Health (2020-2024).</p>
+        </section>
 
-  
-    <div class="news">
-  <h2>news</h2>
-  
-    <table>
-    
-    
-      <tr>
-        <td class="date">Jan 1, 2025</td>
-        <td class="announcement">
-          
-            Our lab is moving to Cedars-Sinai Medical Center in Los Angeles, CA. We are excited to start new collaborations and projects in this vibrant research environment.
+        <section class="section">
+            <h2>Five-Year Vision</h2>
+            <p>Our goal is to offer whole genome sequencing to all children admitted to Cedars-Sinai Guerin Children's and eventually expand this capability throughout the Los Angeles healthcare network. We are recruiting a growing team of basic science investigators studying fundamental developmental processes from conception through birth, generating new insights into how genetics impacts development and disease.</p>
+            <p>Through this integrated approach combining cutting-edge genomics, single-cell analysis, and translational research, we aim to revolutionize pediatric care and establish new standards for precision medicine in children.</p>
+        </section>
 
-          
-        </td>
-      </tr>
+        <div class="highlight-box">
+            <h2>Join Our Team</h2>
+            <p>We are actively recruiting postdoctoral scientists and graduate students</p>
+            <p>Seeking highly motivated individuals with backgrounds in:</p>
+            <p>Developmental Biology • Neuroscience • Genetics • Genomics • Pediatrics</p>
+        </div>
 
-    
-    </table>
-  
-</div>
-
-  
-
-  
-
-  
-    <div class="social">
-  <span class="contacticon center">
-    <a href="mailto:%73%61%6E%67%6A%69%6E %61%74 %69%6C%6C%6E%6F%69%73 %64%6F%74 %65%64%75"><i class="fas fa-envelope"></i></a>
-    
-    
-    <a href="https://github.com/rowitchlab" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-
-    <a href="https://twitter.com/rowitchlab" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
-
-  </span>
-
-  <div class="col three caption">
-    
-  </div>
-</div>
-
-  
-
-</div>
-
-      </div>
+        <section class="section">
+            <h2>Contact</h2>
+            <p><strong>Rowitch Laboratory</strong><br>
+            Cedars-Sinai Guerin Children's<br>
+            Los Angeles, California</p>
+            <p>For research inquiries or collaboration opportunities, please reach out through the Cedars-Sinai researcher portal.</p>
+        </section>
     </div>
 
     <footer>
-
-  <div class="wrapper">
-    &copy; Copyright 2022 Rowitch Lab.
-    Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
-
-    
-  </div>
-
-</footer>
-
-
-    <!-- Load jQuery -->
-<script src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-
-<!-- Load Common JS -->
-<script src="/assets/js/common.js"></script>
-
-
-<!-- Load KaTeX -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
-<script src="/assets/js/katex.js"></script>
-
-
-
-
-<!-- Include custom icon fonts -->
-<link rel="stylesheet" href="/assets/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/assets/css/academicons.min.css">
-
-<!-- Google Analytics -->
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-XXXXXXXXX', 'auto');
-ga('send', 'pageview');
-</script>
-
-
-  </body>
-
+        <div class="container">
+            <p>&copy; 2024 Rowitch Lab | Cedars-Sinai Guerin Children's</p>
+            <p style="margin-top: 10px;">Departments of Pediatrics and Neurosurgery</p>
+        </div>
+    </footer>
+</body>
 </html>
