@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Rowitch Laboratory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00B4D8',
+                        dark: '#0A0A0A',
+                        light: '#F5F5F5'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            }
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+            }
+        }
+    </style>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-y: scroll;
+            scrollbar-width: thin;
+            scrollbar-color: #00B4D8 #0A0A0A;
+        }
+        
+        body::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        body::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        
+        body::-webkit-scrollbar-thumb {
+            background-color: #00B4D8;
+            border-radius: 3px;
+        }
+        
+        /* Animation effects */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .research-image {
+            transition: transform 0.5s ease;
+        }
+        
+        .research-card:hover .research-image {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-light font-inter">
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 py-4 bg-dark/80 bg-blur transition-all duration-300">
+        <div class="container mx-auto px-6 md:px-12">
+            <nav class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">RL</span>
+                    </div>
+                    <span class="text-xl font-bold text-white">ROWITCH LAB</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-light hover:text-primary transition-all duration-300">ABOUT</a>
+                    <a href="research.html" class="text-primary border-b-2 border-primary pb-1">RESEARCH</a>
+                    <a href="team.html" class="text-light hover:text-primary transition-all duration-300">TEAM</a>
+                    <a href="publications.html" class="text-light hover:text-primary transition-all duration-300">PUBLICATIONS</a>
+                    <a href="contact.html" class="text-light hover:text-primary transition-all duration-300">CONTACT</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-light focus:outline-none">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </nav>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-light hover:text-primary transition-all duration-300">ABOUT</a>
+                    <a href="research.html" class="text-primary">RESEARCH</a>
+                    <a href="team.html" class="text-light hover:text-primary transition-all duration-300">TEAM</a>
+                    <a href="publications.html" class="text-light hover:text-primary transition-all duration-300">PUBLICATIONS</a>
+                    <a href="contact.html" class="text-light hover:text-primary transition-all duration-300">CONTACT</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 md:pt-40 md:pb-32 bg-cover bg-center relative" style="background-image: url('https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7618cf6b23fb4746bf2a45d7cc4cffdb.png~tplv-a9rns2rl98-24:720:720.png?rcl=20251008153235859187195DA48C026AC9&amp;rk3s=8e244e95&amp;rrcfp=8a172a1a&amp;x-expires=1760513555&amp;x-signature=1DyyYkOq5yx8HYjV8PD3YudzqMk%3D')">
+        <div class="absolute inset-0 bg-dark/70"></div>
+        <div class="container mx-auto px-6 md:px-12 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-white fade-in">Our Research</h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 fade-in">
+                    Exploring the fundamental mechanisms of chromosome organization and RNA regulation through innovative techniques
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 fade-in">
+                    <a href="#projects" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-md transition-all duration-300">
+                        Research Projects
+                    </a>
+                    <a href="#publications" class="bg-transparent hover:bg-white/10 text-white border border-white font-medium py-3 px-8 rounded-md transition-all duration-300">
+                        Publications
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Overview -->
+    <section class="py-20 bg-gradient-to-b from-dark to-dark/95">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-3xl mx-auto text-center mb-16 fade-in">
+                <span class="text-primary font-semibold text-lg">RESEARCH FOCUS</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 mt-2">Our Scientific Mission</h2>
+                <p class="text-gray-300 text-lg">
+                    The Rowitch Laboratory is dedicated to understanding the complex mechanisms that govern chromosome organization and RNA metabolism. Our interdisciplinary approach combines cutting-edge single-molecule techniques, genomics, and computational analysis to address fundamental questions in molecular biology.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 card-hover fade-in">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-dna text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Chromosome Dynamics</h3>
+                    <p class="text-gray-400">
+                        Investigating the three-dimensional organization of chromosomes and how their spatial arrangement influences gene expression and genome stability.
+                    </p>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 card-hover fade-in">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-rna text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">RNA Regulation</h3>
+                    <p class="text-gray-400">
+                        Studying the lifecycle of RNA molecules from transcription to degradation, with a focus on regulatory mechanisms and their implications in disease.
+                    </p>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm p-8 rounded-xl border border-gray-800 card-hover fade-in">
+                    <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-microscope text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Single-Molecule Methods</h3>
+                    <p class="text-gray-400">
+                        Developing and applying advanced imaging techniques to observe molecular processes in real-time, providing unprecedented insights into biological mechanisms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Projects -->
+    <section id="projects" class="py-20 bg-dark/95">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-3xl mx-auto text-center mb-16 fade-in">
+                <span class="text-primary font-semibold text-lg">CURRENT PROJECTS</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 mt-2">Research in Progress</h2>
+                <p class="text-gray-300 text-lg">
+                    Explore our ongoing research projects that push the boundaries of knowledge in molecular biology and genomics
+                </p>
+            </div>
+            
+            <div class="space-y-16">
+                <!-- Project 1 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in">
+                    <div class="overflow-hidden rounded-xl">
+                        <img src="https://picsum.photos/id/119/800/600" alt="Chromosome folding mechanisms" class="w-full h-auto research-image">
+                    </div>
+                    <div>
+                        <span class="text-primary font-medium">Chromosome Biology</span>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 mt-2">Mechanisms of Chromosome Folding</h3>
+                        <p class="text-gray-300 mb-6">
+                            This project investigates the molecular machinery responsible for chromosome folding and compartmentalization. Using a combination of super-resolution microscopy and chromosome conformation capture techniques, we aim to identify key factors that regulate chromatin structure.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">Chromatin</span>
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">3D Genome</span>
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">Super-resolution Imaging</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-all">
+                            Learn more about this project <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in">
+                    <div class="order-2 lg:order-1">
+                        <span class="text-primary font-medium">RNA Biology</span>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 mt-2">Dynamics of RNA Processing</h3>
+                        <p class="text-gray-300 mb-6">
+                            We are studying the real-time dynamics of RNA splicing and modification using single-molecule tracking in live cells. This work aims to uncover how these processes are regulated and how their dysregulation contributes to human diseases.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">RNA Splicing</span>
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">Single-molecule Tracking</span>
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">Live Cell Imaging</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-all">
+                            Learn more about this project <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    <div class="order-1 lg:order-2 overflow-hidden rounded-xl">
+                        <img src="https://picsum.photos/id/225/800/600" alt="RNA processing dynamics" class="w-full h-auto research-image">
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-in">
+                    <div class="overflow-hidden rounded-xl">
+                        <img src="https://picsum.photos/id/177/800/600" alt="Gene expression regulation" class="w-full h-auto research-image">
+                    </div>
+                    <div>
+                        <span class="text-primary font-medium">Gene Regulation</span>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 mt-2">Epigenetic Control of Gene Expression</h3>
+                        <p class="text-gray-300 mb-6">
+                            This project focuses on understanding how epigenetic modifications influence gene expression patterns during development and in response to environmental cues. We combine genomic approaches with advanced microscopy to study these processes.
+                        </p>
+                        <div class="flex flex-wrap gap-3 mb-6">
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">Epigenetics</span>
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">Gene Regulation</span>
+                            <span class="bg-primary/20 text-primary text-sm px-3 py-1 rounded-full">Genomics</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-all">
+                            Learn more about this project <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Techniques -->
+    <section class="py-20 bg-gradient-to-b from-dark/95 to-dark">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-3xl mx-auto text-center mb-16 fade-in">
+                <span class="text-primary font-semibold text-lg">TECHNIQUES</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 mt-2">Advanced Methodologies</h2>
+                <p class="text-gray-300 text-lg">
+                    Our laboratory employs state-of-the-art techniques to address complex biological questions
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 card-hover fade-in">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Super-resolution Microscopy</h3>
+                    <p class="text-gray-400 text-sm">
+                        Visualizing cellular structures and molecular processes at nanometer resolution
+                    </p>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 card-hover fade-in">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-dna"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Single-molecule Tracking</h3>
+                    <p class="text-gray-400 text-sm">
+                        Following individual molecules in real-time to study their dynamics and interactions
+                    </p>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 card-hover fade-in">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-laptop"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Next-gen Sequencing</h3>
+                    <p class="text-gray-400 text-sm">
+                        Analyzing genome-wide patterns of gene expression and epigenetic modifications
+                    </p>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm p-6 rounded-xl border border-gray-800 card-hover fade-in">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fa fa-flask"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">In vitro Reconstitution</h3>
+                    <p class="text-gray-400 text-sm">
+                        Recreating biological processes in cell-free systems to study their mechanisms
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Highlights -->
+    <section class="py-20 bg-dark">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-3xl mx-auto text-center mb-16 fade-in">
+                <span class="text-primary font-semibold text-lg">HIGHLIGHTS</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 mt-2">Recent Discoveries</h2>
+                <p class="text-gray-300 text-lg">
+                    Key findings from our research that advance our understanding of molecular biology
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-dark/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 card-hover fade-in">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://picsum.photos/id/167/800/600" alt="Research highlight" class="w-full h-full object-cover research-image">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-primary bg-primary/20 px-3 py-1 rounded-full">Nature Cell Biology, 2023</span>
+                        <h3 class="text-xl font-bold mt-4 mb-3">Novel Mechanism of Chromosome Compaction</h3>
+                        <p class="text-gray-400 mb-4">
+                            We identified a previously unknown protein complex that plays a critical role in chromosome compaction during mitosis, providing new insights into how cells ensure accurate segregation of genetic material.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-all text-sm">
+                            Read the publication <i class="fa fa-external-link ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-dark/50 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-800 card-hover fade-in">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://picsum.photos/id/156/800/600" alt="Research highlight" class="w-full h-full object-cover research-image">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs text-primary bg-primary/20 px-3 py-1 rounded-full">Molecular Cell, 2022</span>
+                        <h3 class="text-xl font-bold mt-4 mb-3">Real-time Visualization of RNA Splicing</h3>
+                        <p class="text-gray-400 mb-4">
+                            Using advanced single-molecule imaging, we visualized the splicing process in live cells for the first time, revealing unexpected dynamics and providing new understanding of spliceosome assembly.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-primary hover:text-primary/80 font-medium transition-all text-sm">
+                            Read the publication <i class="fa fa-external-link ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funding & Collaborations -->
+    <section class="py-20 bg-gradient-to-b from-dark to-dark/95 border-t border-gray-800">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-3xl mx-auto text-center mb-16 fade-in">
+                <span class="text-primary font-semibold text-lg">SUPPORT</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 mt-2">Funding & Collaborations</h2>
+                <p class="text-gray-300 text-lg">
+                    Our research is supported by generous grants from leading organizations and conducted in collaboration with esteemed institutions
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-center">Funding Sources</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">NIH</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">NSF</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">HHMI</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">American Cancer Society</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">Howard Hughes Medical Institute</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">University Research Fund</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8 text-center">Collaborating Institutions</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">Harvard University</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">MIT</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">Stanford University</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">University of California</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">Salk Institute</span>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-lg flex items-center justify-center h-24 hover:bg-white/10 transition-colors">
+                            <span class="text-gray-300 font-medium text-center">Max Planck Institute</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Our Research -->
+    <section class="py-20 bg-primary/10">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Join Our Research Team</h2>
+                <p class="text-gray-300 text-lg mb-10 max-w-2xl mx-auto">
+                    We are always looking for talented and motivated researchers to join our team. If you are interested in molecular biology, genomics, or advanced imaging techniques, we encourage you to apply.
+                </p>
+                <a href="contact.html" class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-md transition-all duration-300 inline-flex items-center">
+                    <i class="fa fa-user-plus mr-2"></i> View Open Positions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-gray-800 py-12">
+        <div class="container mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div>
+                    <a href="#" class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-primary rounded-md flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">RL</span>
+                        </div>
+                        <span class="text-xl font-bold text-white">ROWITCH LAB</span>
+                    </a>
+                    <p class="text-gray-400 mb-6">
+                        Advancing our understanding of chromosome organization and RNA regulation through innovative research.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                            <i class="fa fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">Navigation</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-gray-400 hover:text-primary transition-colors">About</a></li>
+                        <li><a href="research.html" class="text-primary">Research</a></li>
+                        <li><a href="team.html" class="text-gray-400 hover:text-primary transition-colors">Team</a></li>
+                        <li><a href="publications.html" class="text-gray-400 hover:text-primary transition-colors">Publications</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">Research Areas</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Chromosome Dynamics</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">RNA Regulation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Single-Molecule Methods</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Epigenetic Control</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">Genome Organization</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-6">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-map-marker text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">
+                                Science Research Building, Room 456<br>
+                                123 University Avenue<br>
+                                Cambridge, MA 02142
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-envelope text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">
+                                kimlab@university.edu
+                            </span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-phone text-primary mt-1 mr-3"></i>
+                            <span class="text-gray-400">
+                                +1 (555) 123-4567
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                    © 2023 Rowitch Laboratory. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-gray-400 text-sm">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuButton.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.querySelector('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.add('py-4');
+                navbar.classList.remove('py-2');
+            }
+        });
+        
+        // Scroll animation for elements
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+        
+        // Set up intersection observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver(handleIntersection, observerOptions);
+        
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
+    
