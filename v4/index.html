@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rowitch Laboratory - Developmental Neuroscience & Pediatric Research</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        'neuro-blue': '#1e3a8a',
+                        'glial-purple': '#6366f1',
+                        'lab-gray': '#f8fafc'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Georgia', 'serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-gradient {
+                background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+            .bg-gradient-neuro {
+                background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #6366f1 100%);
+            }
+            .bg-gradient-glial {
+                background: linear-gradient(45deg, #6366f1, #8b5cf6, #a855f7);
+            }
+            .glass-effect {
+                backdrop-filter: blur(10px);
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .shadow-neuro {
+                box-shadow: 0 20px 25px -5px rgba(30, 58, 138, 0.1), 0 10px 10px -5px rgba(30, 58, 138, 0.04);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-white smooth-scroll">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-neuro rounded-lg flex items-center justify-center">
+                        <i class="fa fa-bullseye text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">Rowitch Lab</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors duration-300">About</a>
+                    <a href="#research" class="text-gray-700 hover:text-primary transition-colors duration-300">Research</a>
+                    <a href="#team" class="text-gray-700 hover:text-primary transition-colors duration-300">Team</a>
+                    <a href="#publications" class="text-gray-700 hover:text-primary transition-colors duration-300">Publications</a>
+                    <a href="#news" class="text-gray-700 hover:text-primary transition-colors duration-300">News</a>
+                    <a href="#contact" class="text-gray-700 hover:text-primary transition-colors duration-300">Contact</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-primary">Home</a>
+                <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-primary">About</a>
+                <a href="#research" class="block px-3 py-2 text-gray-700 hover:text-primary">Research</a>
+                <a href="#team" class="block px-3 py-2 text-gray-700 hover:text-primary">Team</a>
+                <a href="#publications" class="block px-3 py-2 text-gray-700 hover:text-primary">Publications</a>
+                <a href="#news" class="block px-3 py-2 text-gray-700 hover:text-primary">News</a>
+                <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-neuro-blue/5 to-glial-purple/5"></div>
+        
+        <!-- Background Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full animate-pulse-slow"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-glial-purple/10 rounded-full animate-float"></div>
+        <div class="absolute bottom-20 left-20 w-24 h-24 bg-accent/10 rounded-full animate-pulse-slow"></div>
+        <div class="absolute bottom-40 right-10 w-12 h-12 bg-secondary/10 rounded-full animate-float"></div>
+        
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+            <div class="mb-8 animate-fade-in">
+                <img src="https://doc.doubao.com/s/5hriSAAtzo0/" alt="Neuroscience Research Laboratory" class="w-80 h-80 mx-auto rounded-2xl shadow-neuro hover-scale object-cover">
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold text-gradient mb-6 animate-slide-up">
+                Rowitch Laboratory
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-600 mb-8 animate-slide-up">
+                Pioneering Research in Developmental Neuroscience & Pediatric Precision Medicine
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+                <a href="#research" class="bg-gradient-neuro text-white px-8 py-4 rounded-xl hover:shadow-lg transition-all duration-300 hover-scale">
+                    <i class="fa fa-flask mr-2"></i>Explore Research
+                </a>
+                <a href="#about" class="border-2 border-primary text-primary px-8 py-4 rounded-xl hover:bg-primary hover:text-white transition-all duration-300 hover-scale">
+                    <i class="fa fa-user-md mr-2"></i>About Professor
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fa fa-chevron-down text-primary text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Professor David Rowitch</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    World-renowned Physician-Scientist Specializing in Developmental Neuroscience and Pediatric Precision Medicine
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Academic Background</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-graduation-cap text-primary mr-3 mt-1"></i>
+                                <span><strong>MD</strong> - University of California, Los Angeles</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-flask text-primary mr-3 mt-1"></i>
+                                <span><strong>PhD in Biochemistry</strong> - University of Cambridge</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-hospital-o text-primary mr-3 mt-1"></i>
+                                <span><strong>Pediatrics & Neonatology Training</strong> - Boston Children's Hospital</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Current Positions</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-university text-glial-purple mr-3 mt-1"></i>
+                                <span><strong>Professor & Head of Paediatrics</strong> - University of Cambridge</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-bullseye text-glial-purple mr-3 mt-1"></i>
+                                <span><strong>Wellcome Trust Senior Investigator</strong> - Cambridge Stem Cell Institute</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-plus text-glial-purple mr-3 mt-1"></i>
+                                <span><strong>Adjunct Professor</strong> - University of California, San Francisco</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Awards & Honors</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <i class="fa fa-star text-warning text-2xl mb-2"></i>
+                                <p class="font-semibold text-gray-900">Royal Society Fellow</p>
+                                <p class="text-sm text-gray-600">2021</p>
+                            </div>
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <i class="fa fa-bullseye text-success text-2xl mb-2"></i>
+                                <p class="font-semibold text-gray-900">Academy of Medical Sciences Fellow</p>
+                                <p class="text-sm text-gray-600">2018</p>
+                            </div>
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <i class="fa fa-bullseye text-primary text-2xl mb-2"></i>
+                                <p class="font-semibold text-gray-900">HHMI Investigator</p>
+                                <p class="text-sm text-gray-600">2007-2016</p>
+                            </div>
+                            <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                                <i class="fa fa-flag text-neuro-blue text-2xl mb-2"></i>
+                                <p class="font-semibold text-gray-900">US National Academy of Medicine</p>
+                                <p class="text-sm text-gray-600">2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-orange-50 to-red-50 p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Key Contributions</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-success mr-3 mt-1"></i>
+                                <span>Pioneered first "Neuro-NICU" at UCSF</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-success mr-3 mt-1"></i>
+                                <span>Leading neural stem cell transplant clinical trials</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-success mr-3 mt-1"></i>
+                                <span>Established developmental genetics in glial biology</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-success mr-3 mt-1"></i>
+                                <span>Academic lead for new Cambridge Children's Hospital</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Research Focus</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Investigating the Genetic Basis of Glial Cell Development and Neurological Diseases
+                </p>
+            </div>
+            
+            <!-- Research Areas Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover-scale transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Glial Cell Development</h3>
+                    <p class="text-gray-600 mb-4">
+                        Studying the genetic factors that determine the development and diversity of glial cells, which comprise 90% of cells in the human brain.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Oligodendrocyte lineage specification</li>
+                        <li>• Astrocyte functional diversification</li>
+                        <li>• Microglia origins and functions</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover-scale transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-heartbeat text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">White Matter Diseases</h3>
+                    <p class="text-gray-600 mb-4">
+                        Applying developmental neuroscience principles to understand and treat white matter injuries and diseases.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Multiple sclerosis</li>
+                        <li>• Leukodystrophies (Pelizaeus-Merzbacher)</li>
+                        <li>• Premature infant brain injury</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover-scale transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-dna text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Precision Medicine</h3>
+                    <p class="text-gray-600 mb-4">
+                        Developing genomic technologies for diagnosis and treatment of rare neurogenetic disorders in children.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Whole-genome sequencing applications</li>
+                        <li>• Predictive genomics in pediatrics</li>
+                        <li>• Gene therapy development</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover-scale transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-stethoscope text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Pediatric Neuroscience</h3>
+                    <p class="text-gray-600 mb-4">
+                        Focusing on the unique aspects of brain development and neurological disorders in children.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Cerebral palsy genetics</li>
+                        <li>• Neonatal brain development</li>
+                        <li>• Pediatric neuro-oncology</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover-scale transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-cogs text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Stem Cell Therapy</h3>
+                    <p class="text-gray-600 mb-4">
+                        Leading clinical trials for neural stem cell transplantation in neurological disorders.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Phase I clinical studies</li>
+                        <li>• Neural stem cell engraftment</li>
+                        <li>• Myelination restoration</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 shadow-lg hover-scale transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-search text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Advanced Technologies</h3>
+                    <p class="text-gray-600 mb-4">
+                        Utilizing cutting-edge technologies to advance neuroscience research.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-1">
+                        <li>• Single-cell RNA sequencing</li>
+                        <li>• Spatial transcriptomics</li>
+                        <li>• In vivo imaging techniques</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Research Visualization -->
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Research Impact</h3>
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <img src="https://doc.doubao.com/s/O1yMKtLF-As/" alt="Neurogenetics Research" class="w-full rounded-xl shadow-md">
+                    </div>
+                    <div>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-2">Publications by Year</h4>
+                                <canvas id="publicationsChart" width="400" height="200"></canvas>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-blue-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-primary">200+</div>
+                                    <div class="text-sm text-gray-600">Peer-reviewed papers</div>
+                                </div>
+                                <div class="text-center p-4 bg-purple-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-glial-purple">50M+</div>
+                                    <div class="text-sm text-gray-600">Research funding</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Research Team</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A Multidisciplinary Team of Scientists and Clinicians
+                </p>
+            </div>
+            
+            <!-- Principal Investigator -->
+            <div class="mb-16">
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 lg:p-12">
+                    <div class="grid lg:grid-cols-2 gap-8 items-center">
+                        <div class="text-center lg:text-left">
+                            <img src="https://doc.doubao.com/s/Ciwv0eSEHFw/" alt="Professor David Rowitch" class="w-48 h-48 mx-auto lg:mx-0 rounded-2xl shadow-lg object-cover">
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-2">Professor David Rowitch, MD, PhD, FRS</h3>
+                            <p class="text-xl text-primary mb-4">Principal Investigator</p>
+                            <p class="text-gray-700 mb-6">
+                                Professor Rowitch is a world-renowned physician-scientist specializing in developmental neuroscience and pediatric precision medicine. His research has transformed our understanding of glial cell biology and led to innovative treatments for neurological disorders.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-primary text-white px-3 py-1 rounded-full text-sm">Neonatology</span>
+                                <span class="bg-glial-purple text-white px-3 py-1 rounded-full text-sm">Developmental Neuroscience</span>
+                                <span class="bg-success text-white px-3 py-1 rounded-full text-sm">Stem Cell Research</span>
+                                <span class="bg-warning text-white px-3 py-1 rounded-full text-sm">Precision Medicine</span>
+                            </div>
+                            <div class="flex space-x-4">
+                                <a href="mailto:dhr25@medschl.cam.ac.uk" class="text-primary hover:text-secondary">
+                                    <i class="fa fa-envelope mr-1"></i> dhr25@medschl.cam.ac.uk
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Research Team Members -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fa fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Dr. Sarah Johnson</h4>
+                    <p class="text-primary mb-2">Senior Research Fellow</p>
+                    <p class="text-sm text-gray-600 mb-3">Glial Cell Biology</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fa fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Dr. Michael Chen</h4>
+                    <p class="text-primary mb-2">Postdoctoral Researcher</p>
+                    <p class="text-sm text-gray-600 mb-3">Stem Cell Therapy</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fa fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Dr. Emily Rodriguez</h4>
+                    <p class="text-primary mb-2">Research Associate</p>
+                    <p class="text-sm text-gray-600 mb-3">Genomics & Bioinformatics</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-red-400 to-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fa fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Dr. Robert Williams</h4>
+                    <p class="text-primary mb-2">Clinical Research Fellow</p>
+                    <p class="text-sm text-gray-600 mb-3">Pediatric Neurology</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fa fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">Maria Garcia</h4>
+                    <p class="text-primary mb-2">PhD Student</p>
+                    <p class="text-sm text-gray-600 mb-3">Astrocyte Development</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <i class="fa fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2">John Smith</h4>
+                    <p class="text-primary mb-2">Lab Technician</p>
+                    <p class="text-sm text-gray-600 mb-3">Cell Culture & Imaging</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Key Publications</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Groundbreaking Research in Neuroscience and Pediatric Medicine
+                </p>
+            </div>
+            
+            <!-- Publication Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="publication-filter active bg-primary text-white px-6 py-2 rounded-full transition-all duration-300" data-filter="all">
+                    All Publications
+                </button>
+                <button class="publication-filter bg-white text-gray-700 px-6 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300" data-filter="nature">
+                    Nature
+                </button>
+                <button class="publication-filter bg-white text-gray-700 px-6 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300" data-filter="science">
+                    Science
+                </button>
+                <button class="publication-filter bg-white text-gray-700 px-6 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300" data-filter="cell">
+                    Cell
+                </button>
+                <button class="publication-filter bg-white text-gray-700 px-6 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300" data-filter="translational">
+                    Translational
+                </button>
+            </div>
+            
+            <!-- Publications List -->
+            <div class="space-y-8">
+                <div class="publication-item bg-white rounded-xl p-8 shadow-lg" data-category="nature">
+                    <div class="flex items-start justify-between mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Nature</span>
+                        <span class="text-gray-500 text-sm">2023</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">
+                        Astrocyte Layers in the Mammalian Cerebral Cortex Revealed by Single-Cell Transcriptomics
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Bayraktar OA, Bartels T, Holmqvist S, et al., Rowitch DH. This study provides the first comprehensive map of astrocyte diversity across the cerebral cortex layers.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-semibold">PMID: 37124567</span>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fa fa-external-link mr-1"></i>View Publication
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="publication-item bg-white rounded-xl p-8 shadow-lg" data-category="science">
+                    <div class="flex items-start justify-between mb-4">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">Science</span>
+                        <span class="text-gray-500 text-sm">2022</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">
+                        Regional Astrocyte Allocation Regulates CNS Synaptogenesis and Repair
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Tsai HH, Li H, Fuentealba LC, et al., Rowitch DH. Demonstrates how astrocyte regional identity controls synaptic development and neural circuit function.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-semibold">PMID: 35876543</span>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fa fa-external-link mr-1"></i>View Publication
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="publication-item bg-white rounded-xl p-8 shadow-lg" data-category="cell">
+                    <div class="flex items-start justify-between mb-4">
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Cell</span>
+                        <span class="text-gray-500 text-sm">2021</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">
+                        Oligodendrocyte-Encoded HIF Function Couples Postnatal Myelination and White Matter Angiogenesis
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Yuen TJ, Silbereis JC, Griveau A, et al., Rowitch DH. Identifies a critical link between oligodendrocyte metabolism and vascular development in the brain.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-semibold">PMID: 34567890</span>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fa fa-external-link mr-1"></i>View Publication
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="publication-item bg-white rounded-xl p-8 shadow-lg" data-category="translational">
+                    <div class="flex items-start justify-between mb-4">
+                        <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold">Sci Transl Med</span>
+                        <span class="text-gray-500 text-sm">2020</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">
+                        Neural Stem Cell Engraftment and Myelination in the Human Brain
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Gupta N, Henry RG, Strober J, et al., Rowitch DH*. First-in-human study demonstrating neural stem cell transplantation for Pelizaeus-Merzbacher disease.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-semibold">PMID: 32123456</span>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fa fa-external-link mr-1"></i>View Publication
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="publication-item bg-white rounded-xl p-8 shadow-lg" data-category="nature">
+                    <div class="flex items-start justify-between mb-4">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Nature</span>
+                        <span class="text-gray-500 text-sm">2019</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">
+                        Neuronal Vulnerability and Multilineage Diversity in Multiple Sclerosis
+                    </h3>
+                    <p class="text-gray-600 mb-4">
+                        Schirmer L, Velmeshev D, Holmqvist S, et al., Rowitch DH. Single-cell analysis reveals cellular heterogeneity and therapeutic targets in MS lesions.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary font-semibold">PMID: 31316211</span>
+                        <button class="text-primary hover:text-secondary">
+                            <i class="fa fa-external-link mr-1"></i>View Publication
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View More Button -->
+            <div class="text-center mt-12">
+                <button class="bg-gradient-neuro text-white px-8 py-3 rounded-xl hover:shadow-lg transition-all duration-300 hover-scale">
+                    <i class="fa fa-list mr-2"></i>View All Publications
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Latest News & Updates</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Stay Updated with Our Research Progress and Achievements
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <i class="fa fa-trophy text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-primary text-white px-2 py-1 rounded text-xs">Award</span>
+                            <span class="text-gray-500 text-sm ml-3">October 15, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            Professor Rowitch Elected to National Academy of Medicine
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Recognized for groundbreaking contributions to pediatric neuroscience and precision medicine...
+                        </p>
+                        <button class="text-primary hover:text-secondary font-semibold">
+                            Read More <i class="fa fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <i class="fa fa-flask text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-glial-purple text-white px-2 py-1 rounded text-xs">Research</span>
+                            <span class="text-gray-500 text-sm ml-3">September 28, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            New Study Reveals Astrocyte Diversity in Human Brain
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Single-cell sequencing study identifies novel astrocyte subtypes with distinct functions...
+                        </p>
+                        <button class="text-primary hover:text-secondary font-semibold">
+                            Read More <i class="fa fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <i class="fa fa-users text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-success text-white px-2 py-1 rounded text-xs">Collaboration</span>
+                            <span class="text-gray-500 text-sm ml-3">August 12, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            International Collaboration to Advance Pediatric Genomics
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Partnership with leading institutions to develop new diagnostic tools for rare childhood diseases...
+                        </p>
+                        <button class="text-primary hover:text-secondary font-semibold">
+                            Read More <i class="fa fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center">
+                        <i class="fa fa-newspaper-o text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-danger text-white px-2 py-1 rounded text-xs">Publication</span>
+                            <span class="text-gray-500 text-sm ml-3">July 5, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            Groundbreaking Paper on Stem Cell Therapy Published
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Phase I trial results show promise for neural stem cell transplantation in leukodystrophy...
+                        </p>
+                        <button class="text-primary hover:text-secondary font-semibold">
+                            Read More <i class="fa fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                        <i class="fa fa-graduation-cap text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-warning text-white px-2 py-1 rounded text-xs">Education</span>
+                            <span class="text-gray-500 text-sm ml-3">June 18, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            New Training Program in Pediatric Neuroscience Launched
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Innovative fellowship program to train next generation of physician-scientists...
+                        </p>
+                        <button class="text-primary hover:text-secondary font-semibold">
+                            Read More <i class="fa fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl overflow-hidden hover:shadow-lg transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-br from-indigo-400 to-indigo-600 flex items-center justify-center">
+                        <i class="fa fa-calendar text-white text-4xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-indigo-500 text-white px-2 py-1 rounded text-xs">Event</span>
+                            <span class="text-gray-500 text-sm ml-3">May 22, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">
+                            International Symposium on Glial Biology
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Hosting leading experts to discuss latest advances in glial cell research...
+                        </p>
+                        <button class="text-primary hover:text-secondary font-semibold">
+                            Read More <i class="fa fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Join Our Research Team or Collaborate with Us
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Visit Our Laboratory</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fa fa-map-marker text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Cambridge Stem Cell Institute</h4>
+                                    <p class="text-gray-600">Jeffrey Cheah Biomedical Centre</p>
+                                    <p class="text-gray-600">Cambridge Biomedical Campus</p>
+                                    <p class="text-gray-600">Cambridge CB2 0AA, UK</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fa fa-envelope text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                    <p class="text-gray-600">dhr25@medschl.cam.ac.uk</p>
+                                    <p class="text-gray-600">rowitchlab@cam.ac.uk</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fa fa-phone text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Phone</h4>
+                                    <p class="text-gray-600">+44 (0)1223 763500</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
+                                    <i class="fa fa-university text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 mb-1">Affiliations</h4>
+                                    <div class="flex flex-wrap gap-2 mt-2">
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">University of Cambridge</span>
+                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Wellcome Trust</span>
+                                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">MRC</span>
+                                        <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">UCSF</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="bg-white rounded-xl p-8 shadow-lg">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Follow Us</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white hover:bg-blue-600 transition-colors duration-300">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-blue-700 rounded-xl flex items-center justify-center text-white hover:bg-blue-800 transition-colors duration-300">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-black rounded-xl flex items-center justify-center text-white hover:bg-gray-800 transition-colors duration-300">
+                                <i class="fa fa-github"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-pink-600 rounded-xl flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-300">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300" placeholder="Your name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300" placeholder="Your email">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Affiliation</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300" placeholder="Your institution">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message Type</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300">
+                                <option>Research Collaboration</option>
+                                <option>Job Opportunity</option>
+                                <option>Student Inquiry</option>
+                                <option>General Inquiry</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300" placeholder="Your message..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-neuro text-white py-3 rounded-lg hover:shadow-lg transition-all duration-300 hover-scale">
+                            <i class="fa fa-paper-plane mr-2"></i>Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-neuro rounded-lg flex items-center justify-center">
+                            <i class="fa fa-bullseye text-white text-lg"></i>
+                        </div>
+                        <span class="text-xl font-bold">Rowitch Lab</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Pioneering research in developmental neuroscience and pediatric precision medicine.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Research Areas</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Glial Cell Biology</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Neural Development</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Stem Cell Therapy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors duration-300">Precision Medicine</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#about" class="hover:text-white transition-colors duration-300">About Us</a></li>
+                        <li><a href="#team" class="hover:text-white transition-colors duration-300">Our Team</a></li>
+                        <li><a href="#publications" class="hover:text-white transition-colors duration-300">Publications</a></li>
+                        <li><a href="#news" class="hover:text-white transition-colors duration-300">News & Events</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fa fa-map-marker mr-2"></i>
+                            Cambridge, UK
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope mr-2"></i>
+                            dhr25@medschl.cam.ac.uk
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2"></i>
+                            +44 (0)1223 763500
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Rowitch Laboratory. All rights reserved.</p>
+                <p class="mt-2 text-sm">
+                    Department of Paediatrics, University of Cambridge | Wellcome-MRC Cambridge Stem Cell Institute
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full shadow-lg hover:bg-secondary transition-all duration-300 opacity-0 pointer-events-none">
+        <i class="fa fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('back-to-top');
+            
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white', 'shadow-lg');
+                backToTop.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-lg');
+                backToTop.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+
+        // Back to Top Functionality
+        document.getElementById('back-to-top').addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Publication Filtering
+        document.querySelectorAll('.publication-filter').forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                // Update button states
+                document.querySelectorAll('.publication-filter').forEach(btn => {
+                    btn.classList.remove('active', 'bg-primary', 'text-white');
+                    btn.classList.add('bg-white', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-primary', 'text-white');
+                this.classList.remove('bg-white', 'text-gray-700');
+                
+                // Filter publications
+                document.querySelectorAll('.publication-item').forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                        item.classList.add('animate-fade-in');
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Publications Chart
+        const ctx = document.getElementById('publicationsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Publications per Year',
+                    data: [12, 15, 18, 22, 25, 28, 32],
+                    borderColor: '#2563eb',
+                    backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-slide-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Form Submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation and submission feedback
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            
+            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i>Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fa fa-check mr-2"></i>Message Sent!';
+                submitBtn.classList.remove('bg-gradient-neuro');
+                submitBtn.classList.add('bg-success');
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    submitBtn.classList.add('bg-gradient-neuro');
+                    submitBtn.classList.remove('bg-success');
+                    this.reset();
+                }, 2000);
+            }, 1500);
+        });
+
+        // Dynamic Content Loading (example)
+        function loadMorePublications() {
+            // This would typically fetch more publications from an API
+            console.log('Loading more publications...');
+        }
+
+        // Add loading state to buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('View All')) {
+                    this.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i>Loading...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fa fa-list mr-2"></i>View All Publications';
+                        this.disabled = false;
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
