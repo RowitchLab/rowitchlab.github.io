@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGO Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Configure Tailwind custom colors and fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .logo-container {
+                @apply relative overflow-hidden rounded-lg bg-white shadow-md transition-all duration-300 hover:shadow-xl;
+            }
+            .logo-image {
+                @apply w-full h-auto object-contain transition-transform duration-500 hover:scale-110;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- Page Header -->
+    <header class="bg-gradient-to-r from-primary to-secondary text-white shadow-lg">
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-tight">
+                <i class="fa fa-picture-o mr-3" aria-hidden="true"></i>LOGO Gallery
+            </h1>
+            <p class="mt-2 text-lg opacity-90">Displaying logo0 to logo10 from /assets/imgs/ directory</p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Description Text -->
+        <div class="mb-10 text-center max-w-3xl mx-auto">
+            <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-semibold mb-4">LOGO Collection</h2>
+            <p class="text-gray-600">Below are all logos from logo0 to logo10. Click on any logo to view a larger version.</p>
+        </div>
+        
+        <!-- LOGO Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Logo images will be generated dynamically via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Image Viewer Modal -->
+    <div id="imageViewer" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full">
+            <button id="closeViewer" class="absolute -top-12 right-0 text-white text-2xl hover:text-gray-300 transition-colors">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+            <img id="viewerImage" src="" alt="Large image preview" class="max-h-[80vh] mx-auto shadow-2xl rounded-lg">
+            <p id="imageCaption" class="text-white text-center mt-4"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 LOGO Gallery Page | Built with Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <script>
+        // Execute when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoGrid = document.querySelector('.grid');
+            const imageViewer = document.getElementById('imageViewer');
+            const viewerImage = document.getElementById('viewerImage');
+            const imageCaption = document.getElementById('imageCaption');
+            const closeViewer = document.getElementById('closeViewer');
+            
+            // Generate image elements for logo0 to logo10
+            for (let i = 0; i <= 10; i++) {
+                const logoPath = `/assets/imgs/logo${i}.png`;
+                
+                // Create logo container
+                const logoContainer = document.createElement('div');
+                logoContainer.className = 'logo-container p-4 flex items-center justify-center min-h-[150px]';
+                
+                // Create image element
+                const img = document.createElement('img');
+                img.src = logoPath;
+                img.alt = `LOGO ${i}`;
+                img.className = 'logo-image max-h-[120px]';
+                
+                // Add image load error handling
+                img.onerror = function() {
+                    this.src = `https://picsum.photos/seed/logo${i}/200/100`;
+                    this.alt = `LOGO ${i} (placeholder)`;
+                };
+                
+                // Click image to view larger version
+                img.addEventListener('click', () => {
+                    viewerImage.src = this.src;
+                    imageCaption.textContent = this.alt;
+                    imageViewer.classList.remove('hidden');
+                    imageViewer.classList.add('flex');
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                });
+                
+                // Add to grid
+                logoContainer.appendChild(img);
+                logoGrid.appendChild(logoContainer);
+            }
+            
+            // Close image viewer
+            closeViewer.addEventListener('click', () => {
+                imageViewer.classList.add('hidden');
+                imageViewer.classList.remove('flex');
+                document.body.style.overflow = ''; // Restore background scrolling
+            });
+            
+            // Close image viewer when clicking background
+            imageViewer.addEventListener('click', (e) => {
+                if (e.target === imageViewer) {
+                    closeViewer.click();
+                }
+            });
+            
+            // Close image viewer with ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !imageViewer.classList.contains('hidden')) {
+                    closeViewer.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    
